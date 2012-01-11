@@ -1,0 +1,21 @@
+jquery.lazyLoader
+=================
+
+add links either pointing to an image `src` or with a `data-img` attribute and
+it will convert them for images with that src.
+
+eg:
+
+    <a href="myimage.jpg">my image</a>
+
+converts to
+
+    <img src="myimage.jpg" alt="my image" />
+
+and with data attribute:
+
+    <a href="mypage.html" data-img="myimage.jpg">my image</a>
+
+converts to
+
+    <img src="myimage.jpg" alt="my image" />
