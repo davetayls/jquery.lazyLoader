@@ -13,13 +13,7 @@
         "lazyLoader"
     ],
     "dependencies" : { },
-    "devDependencies": { 
-        "coffee-script": "1.x.x",
-        "webdriverjs": ">=0.5.8"
-    },
-    "scripts": {
-        "test": "cake test"
-    },
+    "devDependencies": { },
     "license": "MIT"
 }
 
