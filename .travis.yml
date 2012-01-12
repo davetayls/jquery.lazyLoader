@@ -1,0 +1,5 @@
+language: node_js
+before_script: sh -e /etc/init.d/xvfb start
+node_js:
+  - 0.4
+

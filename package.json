@@ -1,0 +1,23 @@
+{
+    "name": "jquery.lazyLoader",
+    "version": "0.0.1",
+    "author": "davetayls <dave@the-taylors.org>",
+    "description": "basic lazy loading of images from links",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:davetayls/jquery.lazyLoader.git"
+    },
+    "keywords": [
+        "jQuery",
+        "lazyLoader"
+    ],
+    "dependencies" : { },
+    "devDependencies": { 
+        "webdriverjs": ">=0.5.8"
+    },
+    "scripts": {
+        "test": "cake test"
+    },
+    "license": "MIT"
+}
+
