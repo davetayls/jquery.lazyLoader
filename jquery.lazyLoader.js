@@ -16,7 +16,7 @@
 
     $.fn.lazyLoader = function(options) {
         var settings = $.extend({}, DEFAULT_SETTINGS, options);
-        return this.find('a').each(function(){
+        return this.each(function(){
             var $this = $(this);
             if ($this.data('img') || settings.imageRegex.test(this.href)) {
                 var src = $this.data('img') || this.href,
