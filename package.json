@@ -12,8 +12,14 @@
         "plugin",
         "lazyLoader"
     ],
-    "dependencies" : { },
-    "devDependencies": { },
+    "dependencies" : {},
+    "devDependencies": { 
+        "jasmine-node": "1.x.x",
+        "jsdom": "0.2.x"
+    },
+    "scripts": {
+        "test": "jasmine-node test"
+    },
     "license": "MIT"
 }
 
