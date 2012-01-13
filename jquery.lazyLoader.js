@@ -1,5 +1,5 @@
 /**
-    jQuery.lazyLoader v0.1
+    jQuery.lazyLoader v0.2
     Dave Taylor http://the-taylors.org
 
     @license The MIT License (MIT)
