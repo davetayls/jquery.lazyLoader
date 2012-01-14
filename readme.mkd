@@ -1,10 +1,23 @@
 jquery.lazyLoader
 =================
 
-add links either pointing to an image `src` or with a `data-img` attribute and
-it will convert them for images with that src.
+Converts links either pointing to an image `src` or with a `data-img` attribute to images with that source.
 
-eg:
+Usage
+--- 
+
+With the following markup
+
+    <div id="#lazy">
+        <a href="myimage.jpg">my image</a>
+    </div>
+
+You run the plugin on the links
+
+    $('#lazy a').lazyLoader();
+
+Examples
+--- 
 
     <a href="myimage.jpg">my image</a>
 
@@ -19,3 +32,12 @@ and with data attribute:
 converts to
 
     <img src="myimage.jpg" alt="my image" />
+
+Test Suite
+---
+
+To run the test suite, you need node and npm
+
+    $ npm install
+    $ npm test
+
