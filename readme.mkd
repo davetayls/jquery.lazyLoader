@@ -34,6 +34,41 @@ converts to
 
     <img src="myimage.jpg" alt="my image" />
 
+Responsive images
+--- 
+
+If you want to dynamically load images dependent on the screen dimensions then
+you can use the following.
+
+    <a href="myimage.jpg" 
+       data-img768="myimage-768.jpg" 
+       data-img990="myimage-990.jpg" 
+    >my image</a>
+
+    $('a').lazyLoader({
+        img: [768,990] // this must be sorted correctly
+    });
+
+Or it also supports dynamic urls so you don't need all those data attributes.
+
+    <a href="myimage.jpg">my image</a>
+
+    $('a').lazyLoader({
+        img: function(url, windowWidth) {
+            if (windowWidth >= 768){
+                return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
+            } else {
+                return url;
+            }
+        }
+    });
+
+This function appends "-mega" on to the end of the url if the windowWidth is
+greater than or equal to 768.
+
+    <img src="myimage-mega.jpg" alt="my image" />
+
+
 Test Suite
 ---
 

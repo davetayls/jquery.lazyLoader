@@ -1,5 +1,4 @@
-/*jslint browser: true, vars: true, white: true, forin: true, nomen: true, sloppy: true */
-/*global define,require,describe,afterEach,beforeEach,expect,it,waitsFor */
+/*global console,define,require,describe,afterEach,beforeEach,expect,it,waitsFor,__dirname */
 describe('lazyLoader', function () {
 
     var jsdom = require('jsdom'),
