@@ -52,20 +52,22 @@
                     }
                 });
                 return url.replace(/.(jpg|gif|png)$/i, suffix + '.$1'); 
+            } else {
+                return url;
             }
         },
         src: function(url){
             this.$img.attr('src', url);
         },
         updateStep: function(windowWidth) {
-            var step,
+            var step = 0,
                 ln = this.settings.steps.length, i, itm;
             for (i = 0; i < ln; i+=1) {
                 if (windowWidth >= this.settings.steps[i]) {
                     step = this.settings.steps[i];
                 }
             }
-            if (step && step !== this.currentStep) {
+            if (step !== this.currentStep) {
                 this.currentStep = step;
                 this.src(this.getSrc(this.originalSrc, windowWidth));
             }
