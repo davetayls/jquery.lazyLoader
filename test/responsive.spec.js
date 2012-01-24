@@ -8,7 +8,7 @@ describe('responsive images', function () {
     beforeEach(function () {
         var self = this;
         jsdom.env('./test/SpecRunner.html', [
-            'http://code.jquery.com/jquery-1.5.min.js',
+            path.join(__dirname, '../lib/jquery-1.5.2.min.js'),
             path.join(__dirname, '../jquery.lazyLoader.js')
         ], function(errors, window){
             if (errors) {
@@ -43,7 +43,7 @@ describe('responsive images', function () {
         spyOn($.fn, 'width').andReturn(768);
         expect($(this.window).width()).toBe(768);
         $links.lazyLoader({
-            img: [768,990]
+            steps: [768,990]
         });
         expect($tablet.find('img').length).toBe(1);
         expect($tablet.find('img').attr('src')).toBe('test/myimage-768.jpg');
@@ -56,7 +56,7 @@ describe('responsive images', function () {
         spyOn($.fn, 'width').andReturn(990);
         expect($(this.window).width()).toBe(990);
         $links.lazyLoader({
-            img: [768,990]
+            steps: [768,990]
         });
         expect($desktop.find('img').length).toBe(1);
         expect($desktop.find('img').attr('src')).toBe('test/myimage-990.jpg');
@@ -79,6 +79,34 @@ describe('responsive images', function () {
         });
         expect($container.find('img').length).toBe(1);
         expect($container.find('img').attr('src')).toBe('test/myimage-mega.jpg');
+    });
+    it('should trigger a new src when window goes above step', function () {
+        var $ = this.window.$,
+            $container = $('#dynamic'),
+            $links = $container.find('a'),
+            loader,
+            $img
+        ;
+        var spy = spyOn($.fn, 'width').andReturn(320);
+
+        $links.lazyLoader({
+            img: function(url, windowWidth) {
+                if (windowWidth >= 768){
+                    return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
+                } else {
+                    return url;
+                }
+            },
+            steps: [768, 990]
+        });
+        $img = $container.find('img');
+
+        expect($img.length).toBe(1);
+        expect($img.attr('src')).toBe('test/myimage.jpg');
+
+        loader = $links.data().lazyLoader;
+        expect(loader.updateStep(768)).toBe(768);
+        expect($img.attr('src')).toBe('test/myimage-mega.jpg');
     });
 });
 

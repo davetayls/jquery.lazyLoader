@@ -46,7 +46,7 @@ you can use the following.
     >my image</a>
 
     $('a').lazyLoader({
-        img: [768,990] // this must be sorted correctly
+        steps: [768,990] // this must be sorted correctly
     });
 
 Or it also supports dynamic urls so you don't need all those data attributes.
