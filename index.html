@@ -1,88 +1,173 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-  <meta charset='utf-8'>
+    <head>
+        <title>jquery.lazyLoader. Semantic, organic responsive images</title>
+        
+        <script src="lib/jquery-1.5.2.min.js"></script>
+        <script src="jquery.lazyLoader.js"></script>
+        <style type="text/css">
+            body { font-family: arial, sans-serif; }
+            pre code { background: #ddd; display: block; padding: 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; }
+            #container { margin: 0 auto; max-width: 800px; }
+            #share {
+                padding: 3px 5px;
+                zoom: 1;
+            }
+            #share:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+            #share iframe {
+            }
+            .share-itm {
+                padding: 3px 10px 3px 0;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <p>
+                <a href="http://the-taylors.org">&lt; Dave Taylor</a>
+            </p>
+            <h1>jquery.lazyLoader. Semantic, organic responsive images</h1>
+            <div id="share">
+                <!-- github -->
+                <div class="share-itm">
+                    <a href="http://github.com/davetayls/jquery.lazyLoader" target="_blank" class="gitwatch">view on github</a>
+                </div>
+                <!-- facebook -->
+                <div class="share-itm">
+                    <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fthe-taylors.org%2Fjquery.lazyLoader%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=134627293286962" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+                </div>
+                <!-- twitter -->
+                <div class="share-itm">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="davetayls">Tweet</a>
+                </div>
+                <div class="share-itm">
+                    <a href="https://twitter.com/davetayls" class="twitter-follow-button" data-show-count="false">Follow @davetayls</a>
+                </div>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>                    
+                <script type="text/javascript" src="https://github.com/addyosmani/github-watchers-button/raw/master/github-watchers.min.js"></script>
+            </div>
+            
 
-  <title>davetayls/jquery.lazyLoader @ GitHub</title>
+            <p>There's been a fair few ways in which people have been trying to achieve
+                responsive images. Here's another angle at the same problem. The idea is to
+                keep the process as organic as possible and not rely on tricking the browser
+                in to submission to support responsive <code>&lt;img&gt;</code> tags 
+                (maybe one day we won&rsquo;t have to).
+            </p>
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #669c54;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
+            <p>This doesn't have to be used for responsive images. If you just want to lazy-load images
+                on the fly this can also be very helpful.</p>
+
+            <p>This is my contribution to the toolset, I think it has it's place but <a href="http://twitter.com/davetayls">let me know</a>
+                if I've missed something obvious. It&rsquo; highly likely ;)</p>
+
+            <h2>Example</h2>
+            <p>Resize the screen, the image below will jump in sizes between 0px,
+            600px and 900px</p>
+            <p id="examples">
+                <a href="http://lorempixel.com/" 
+                   data-img="http://lorempixel.com/100/100/people">people</a>
+            </p>
+            <script>
+                $('#examples a').lazyLoader({
+                    img: function(url, winWidth){
+                        if (winWidth >=600 && winWidth < 900) {
+                            return 'http://lorempixel.com/400/400/people';
+                        } else if (winWidth >=900) {
+                            return 'http://lorempixel.com/600/600/people';
+                        } else {
+                            return url;
+                        }
+                    },
+                    steps: [600,900]
+                });
+            </script>
+
+            <p><a href="http://travis-ci.org/davetayls/jquery.lazyLoader"><img src="https://secure.travis-ci.org/davetayls/jquery.lazyLoader.png" alt="Build Status" title="" /></a></p>
+
+            <p>Converts links either pointing to an image <code>src</code> or with a <code>data-img</code> attribute to images with that source.</p>
+
+            <h2>Install</h2>
+
+            <h2>Usage</h2>
+
+            <p>With the following markup</p>
+
+<pre><code>&lt;div id="#lazy"&gt;
+    &lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+            <p>You run the plugin on the links</p>
+
+<pre><code>$('#lazy a').lazyLoader();
+</code></pre>
+
+            <h2>Examples</h2>
+
+<pre><code>&lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+</code></pre>
+
+            <p>converts to</p>
+
+<pre><code>&lt;img src="myimage.jpg" alt="my image" /&gt;
+</code></pre>
+
+            <p>and with data attribute:</p>
+
+<pre><code>&lt;a href="mypage.html" data-img="myimage.jpg"&gt;my image&lt;/a&gt;
+</code></pre>
+
+            <p>converts to</p>
+
+<pre><code>&lt;img src="myimage.jpg" alt="my image" /&gt;
+</code></pre>
+
+            <h2>Responsive images</h2>
+
+            <p>If you want to dynamically load images dependent on the screen dimensions then
+                you can use the following.</p>
+
+<pre><code>&lt;a href="myimage.jpg" 
+   data-img768="myimage-768.jpg" 
+   data-img990="myimage-990.jpg" 
+&gt;my image&lt;/a&gt;
+
+$('a').lazyLoader({
+    steps: [768,990] // this must be sorted correctly
+});
+</code></pre>
+
+                <p>Or it also supports dynamic urls so you don't need all those data attributes.</p>
+
+<pre><code>&lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+
+$('a').lazyLoader({
+    img: function(url, windowWidth) {
+        if (windowWidth &gt;= 768){
+            return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
+        } else {
+            return url;
+        }
     }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #9963ab; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #9963ab; }
-    h3 { text-align: center; color: #9963ab; }
-    a { color: #9963ab; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
+});
+</code></pre>
 
-<body>
-  <a href="https://github.com/davetayls/jquery.lazyLoader"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+                <p>This function appends "-mega" on to the end of the url if the windowWidth is
+                    greater than or equal to 768.</p>
 
-  <div id="container">
+<pre><code>&lt;img src="myimage-mega.jpg" alt="my image" /&gt;
+</code></pre>
 
-    <div class="download">
-      <a href="https://github.com/davetayls/jquery.lazyLoader/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/davetayls/jquery.lazyLoader/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-    </div>
+                    <h2>Test Suite</h2>
 
-    <h1><a href="https://github.com/davetayls/jquery.lazyLoader">jquery.lazyLoader</a>
-      <span class="small">by <a href="https://github.com/davetayls">davetayls</a></span></h1>
+                    <p>To run the test suite, you need node and npm</p>
 
-    <div class="description">
-      Semantic, organic responsive images
-    </div>
+<pre><code>$ npm install
+$ npm test
+</code></pre>
 
-    
-
-    
-
-    
-
-    
-
-    
-      <h2>Authors</h2>
-      <p>davetayls (dave@the-taylors.org)<br/>      </p>
-    
-
-    
-      <h2>Contact</h2>
-      <p>Dave Taylor (dave@the-taylors.org)<br/>      </p>
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/davetayls/jquery.lazyLoader/zipball/master">zip</a> or
-      <a href="https://github.com/davetayls/jquery.lazyLoader/tarball/master">tar formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/davetayls/jquery.lazyLoader</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/davetayls/jquery.lazyLoader">davetayls/jquery.lazyLoader</a>
-    </div>
-
-  </div>
-
-</body>
+                    </div>
+    </body>
 </html>
