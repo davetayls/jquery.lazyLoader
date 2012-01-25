@@ -1,0 +1,79 @@
+jquery.lazyLoader
+=================
+[![Build Status](https://secure.travis-ci.org/davetayls/jquery.lazyLoader.png)](http://travis-ci.org/davetayls/jquery.lazyLoader)
+
+Converts links either pointing to an image `src` or with a `data-img` attribute to images with that source.
+
+Usage
+--- 
+
+With the following markup
+
+    <div id="#lazy">
+        <a href="myimage.jpg">my image</a>
+    </div>
+
+You run the plugin on the links
+
+    $('#lazy a').lazyLoader();
+
+Examples
+--- 
+
+    <a href="myimage.jpg">my image</a>
+
+converts to
+
+    <img src="myimage.jpg" alt="my image" />
+
+and with data attribute:
+
+    <a href="mypage.html" data-img="myimage.jpg">my image</a>
+
+converts to
+
+    <img src="myimage.jpg" alt="my image" />
+
+Responsive images
+--- 
+
+If you want to dynamically load images dependent on the screen dimensions then
+you can use the following.
+
+    <a href="myimage.jpg" 
+       data-img768="myimage-768.jpg" 
+       data-img990="myimage-990.jpg" 
+    >my image</a>
+
+    $('a').lazyLoader({
+        steps: [768,990] // this must be sorted correctly
+    });
+
+Or it also supports dynamic urls so you don't need all those data attributes.
+
+    <a href="myimage.jpg">my image</a>
+
+    $('a').lazyLoader({
+        img: function(url, windowWidth) {
+            if (windowWidth >= 768){
+                return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
+            } else {
+                return url;
+            }
+        }
+    });
+
+This function appends "-mega" on to the end of the url if the windowWidth is
+greater than or equal to 768.
+
+    <img src="myimage-mega.jpg" alt="my image" />
+
+
+Test Suite
+---
+
+To run the test suite, you need node and npm
+
+    $ npm install
+    $ npm test
+

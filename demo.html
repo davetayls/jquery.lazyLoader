@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>jquery.lazyLoader. Semantic, organic responsive images</title>
+        
+        <script src="lib/jquery-1.5.2.min.js"></script>
+        <script src="jquery.lazyLoader.js"></script>
+        <style type="text/css">
+            body { font-family: arial, sans-serif; }
+            pre code { background: #ddd; display: block; padding: 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; }
+            #container { margin: 0 auto; max-width: 800px; }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>jquery.lazyLoader. Semantic, organic responsive images</h1>
+
+            <h2>Example</h2>
+            <p>Resize the screen, the image below will jump in sizes between 0px,
+            600px and 900px</p>
+            <p id="examples">
+                <a href="http://lorempixel.com/" 
+                   data-img="http://lorempixel.com/100/100/people">people</a>
+            </p>
+            <script>
+                $('#examples a').lazyLoader({
+                    img: function(url, winWidth){
+                        if (winWidth >=600 && winWidth < 900) {
+                            return 'http://lorempixel.com/400/400/people';
+                        } else if (winWidth >=900) {
+                            return 'http://lorempixel.com/600/600/people';
+                        } else {
+                            return url;
+                        }
+                    },
+                    steps: [600,900]
+                });
+            </script>
+
+            <p><a href="http://travis-ci.org/davetayls/jquery.lazyLoader"><img src="https://secure.travis-ci.org/davetayls/jquery.lazyLoader.png" alt="Build Status" title="" /></a></p>
+
+            <p>Converts links either pointing to an image <code>src</code> or with a <code>data-img</code> attribute to images with that source.</p>
+
+            <h2>Usage</h2>
+
+            <p>With the following markup</p>
+
+<pre><code>&lt;div id="#lazy"&gt;
+    &lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+            <p>You run the plugin on the links</p>
+
+<pre><code>$('#lazy a').lazyLoader();
+</code></pre>
+
+            <h2>Examples</h2>
+
+<pre><code>&lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+</code></pre>
+
+            <p>converts to</p>
+
+<pre><code>&lt;img src="myimage.jpg" alt="my image" /&gt;
+</code></pre>
+
+            <p>and with data attribute:</p>
+
+<pre><code>&lt;a href="mypage.html" data-img="myimage.jpg"&gt;my image&lt;/a&gt;
+</code></pre>
+
+            <p>converts to</p>
+
+<pre><code>&lt;img src="myimage.jpg" alt="my image" /&gt;
+</code></pre>
+
+            <h2>Responsive images</h2>
+
+            <p>If you want to dynamically load images dependent on the screen dimensions then
+                you can use the following.</p>
+
+<pre><code>&lt;a href="myimage.jpg" 
+   data-img768="myimage-768.jpg" 
+   data-img990="myimage-990.jpg" 
+&gt;my image&lt;/a&gt;
+
+$('a').lazyLoader({
+    steps: [768,990] // this must be sorted correctly
+});
+</code></pre>
+
+                <p>Or it also supports dynamic urls so you don't need all those data attributes.</p>
+
+<pre><code>&lt;a href="myimage.jpg"&gt;my image&lt;/a&gt;
+
+$('a').lazyLoader({
+    img: function(url, windowWidth) {
+        if (windowWidth &gt;= 768){
+            return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
+        } else {
+            return url;
+        }
+    }
+});
+</code></pre>
+
+                <p>This function appends "-mega" on to the end of the url if the windowWidth is
+                    greater than or equal to 768.</p>
+
+<pre><code>&lt;img src="myimage-mega.jpg" alt="my image" /&gt;
+</code></pre>
+
+                    <h2>Test Suite</h2>
+
+                    <p>To run the test suite, you need node and npm</p>
+
+<pre><code>$ npm install
+$ npm test
+</code></pre>
+
+                    </div>
+    </body>
+</html>

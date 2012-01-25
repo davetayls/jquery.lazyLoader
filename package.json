@@ -1,0 +1,25 @@
+{
+    "name": "jquery.lazyLoader",
+    "version": "0.0.1",
+    "author": "davetayls <dave@the-taylors.org>",
+    "description": "basic lazy loading of images from links",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:davetayls/jquery.lazyLoader.git"
+    },
+    "keywords": [
+        "jQuery",
+        "plugin",
+        "lazyLoader"
+    ],
+    "dependencies" : {},
+    "devDependencies": { 
+        "jasmine-node": "1.x.x",
+        "jsdom": "0.2.x"
+    },
+    "scripts": {
+        "test": "jasmine-node --verbose test"
+    },
+    "license": "MIT"
+}
+

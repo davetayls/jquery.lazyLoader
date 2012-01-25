@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Jasmine Spec Runner</title>
+    <link rel="shortcut icon" type="image/png" href="jasmine_favicon.png">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="jasmine.css">
+    <script src="jasmine.js"></script>
+    <script src="jasmine-html.js"></script>
+
+    <!-- include spec files here... -->
+    <script src="spec/lazyLoader.spec.js"></script>
+
+    <!-- include source files here... -->
+    <script src="../jquery.lazyLoader.js"></script>
+
+    <script type="text/javascript">
+        (function() {
+        var jasmineEnv = jasmine.getEnv();
+        jasmineEnv.updateInterval = 1000;
+
+        var trivialReporter = new jasmine.TrivialReporter();
+
+        jasmineEnv.addReporter(trivialReporter);
+
+        jasmineEnv.specFilter = function(spec) {
+            return trivialReporter.specFilter(spec);
+        };
+
+        var currentWindowOnload = window.onload;
+
+        window.onload = function() {
+            if (currentWindowOnload) {
+            currentWindowOnload();
+            }
+            execJasmine();
+        };
+
+        function execJasmine() {
+            jasmineEnv.execute();
+        }
+
+        })();
+    </script>
+
+</head>
+<body>
+    <div id="hrefLink">
+        <a href="http://dummyimage.com/20x20.jpg">image</a>
+    </div>
+    <div id="hrefData">
+        <a href="http://the-taylors.org" data-img="http://dummyimage.com/20x20.jpg">image</a>
+    </div>
+    <div id="tablet">
+        <a href="myimage.jpg" 
+            data-img768="myimage-768.jpg" 
+            data-img990="myimage-990.jpg" 
+        >my image</a>
+    </div>
+    <div id="desktop">
+        <a href="myimage.jpg" 
+            data-img768="myimage-768.jpg" 
+            data-img990="myimage-990.jpg" 
+        >my image</a>
+    </div>
+    <div id="dynamic">
+        <a href="myimage.jpg">my image</a>
+    </div>
+</body>
+</html>
+
