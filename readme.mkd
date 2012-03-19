@@ -60,7 +60,8 @@ Or it also supports dynamic urls so you don't need all those data attributes.
             } else {
                 return url;
             }
-        }
+        },
+        steps: [768,990] // leave this out if you just want it to run once
     });
 
 This function appends "-mega" on to the end of the url if the windowWidth is
