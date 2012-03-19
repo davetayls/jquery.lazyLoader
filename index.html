@@ -152,7 +152,8 @@ $('a').lazyLoader({
             return url.replace(/.(jpg|gif|png)$/i, '-mega.$1'); 
         } else {
             return url;
-        }
+        },
+        steps: [768,990] // leave this out if you just want it to run once
     }
 });
 </code></pre>
