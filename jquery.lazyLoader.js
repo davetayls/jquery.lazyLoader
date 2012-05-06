@@ -1,5 +1,5 @@
 /**
-    jQuery.lazyLoader v0.3
+    jQuery.lazyLoader v0.4.0
     Dave Taylor http://the-taylors.org
 
     @license The MIT License (MIT)
@@ -36,8 +36,16 @@
         originalSrc: '',
         currentStep: 0,
         addImage: function(){
+            var self = this;
             this.$img = $('<img alt="' + this.$this.text() + '" />');
             this.$this.before(this.$img).remove();
+            if (this.$img[0].complete){
+                $(self).trigger('imageLoaded', [this]);
+            } else {
+                this.$img.on('load', function(ev){
+                    $(self).trigger('imageLoaded', [this]);
+                });
+            }
         },
         getSrc: function(url, winWidth) {
             var windowWidth = winWidth || $window.width(),
@@ -72,6 +80,10 @@
                 this.src(this.getSrc(this.originalSrc, windowWidth));
             }
             return step;
+        },
+        on: function(){
+            $.fn.on.apply($(this), arguments);
+            return this;
         }
     };
 
@@ -90,9 +102,16 @@
     };
 
     $.fn.lazyLoader = function(options) {
+        var self = this,
+            notComplete = this.length;
         return this.each(function(){
             var settings = $.extend({}, DEFAULT_SETTINGS, options),
                 loader = new LazyLoader(this, settings);
+                loader.on('imageLoaded', function(ev, image) {
+                    if (notComplete-- === 1){
+                        self.trigger('imagesLoaded');
+                    }
+                });
             $(this).data(DATA_KEY, loader);
             $.lazyLoader.all.push(loader);
         });
