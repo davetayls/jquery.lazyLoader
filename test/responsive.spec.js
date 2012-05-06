@@ -8,7 +8,7 @@ describe('responsive images', function () {
     beforeEach(function () {
         var self = this;
         jsdom.env('./test/SpecRunner.html', [
-            path.join(__dirname, '../lib/jquery-1.5.2.min.js'),
+            path.join(__dirname, '../lib/jquery-1.7.2.min.js'),
             path.join(__dirname, '../jquery.lazyLoader.js')
         ], function(errors, window){
             if (errors) {
