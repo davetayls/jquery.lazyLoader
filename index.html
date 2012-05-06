@@ -164,6 +164,12 @@ $('a').lazyLoader({
 <pre><code>&lt;img src="myimage-mega.jpg" alt="my image" /&gt;
 </code></pre>
 
+<h2>Detecting When All Images Have Loaded</h2>
+<pre><code>$('[rel="image"]').on('imagesLoaded', function(ev){
+    // all images have been loaded
+});
+</code></pre>
+
                     <h2>Test Suite</h2>
 
                     <p>To run the test suite, you need node and npm</p>

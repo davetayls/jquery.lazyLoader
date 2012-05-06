@@ -73,9 +73,9 @@ greater than or equal to 768.
 Detecting When All Images Have Loaded
 ---
 
-$('[rel="image"]').on('imagesLoaded', function(ev){
-    // all images have been loaded
-});
+    $('[rel="image"]').on('imagesLoaded', function(ev){
+        // all images have been loaded
+    });
 
 Test Suite
 ---
