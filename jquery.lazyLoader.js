@@ -1,5 +1,5 @@
 /**
-    jQuery.lazyLoader v0.4.0
+    jQuery.lazyLoader v0.4.2
     Dave Taylor http://the-taylors.org
 
     @license The MIT License (MIT)
@@ -25,6 +25,8 @@
         this.settings = settings;
         this.element = element;
         this.$this = $(this.element);
+        
+        this.imageLoaded = $.Deferred();
 
         if (this.$this.data('img') || this.settings.imageRegex.test(this.element.href)) {
             this.originalSrc = this.$this.data('img') || this.element.href;
@@ -40,10 +42,10 @@
             this.$img = $('<img alt="' + this.$this.text() + '" />');
             this.$this.before(this.$img).remove();
             if (this.$img[0].complete){
-                $(self).trigger('imageLoaded', [this]);
+                self.imageLoaded.resolve(this.$img[0]);
             } else {
                 this.$img.on('load', function(ev){
-                    $(self).trigger('imageLoaded', [this]);
+                    self.imageLoaded.resolve(this);
                 });
             }
         },
@@ -59,7 +61,7 @@
                         suffix = '-' + this;
                     }
                 });
-                return url.replace(/.(jpg|gif|png)$/i, suffix + '.$1'); 
+                return url.replace(/.(jpg|gif|png)$/i, suffix + '.$1');
             } else {
                 return url;
             }
@@ -80,10 +82,6 @@
                 this.src(this.getSrc(this.originalSrc, windowWidth));
             }
             return step;
-        },
-        on: function(){
-            $.fn.on.apply($(this), arguments);
-            return this;
         }
     };
 
@@ -103,13 +101,16 @@
 
     $.fn.lazyLoader = function(options) {
         var self = this,
+            deferred = $.Deferred(),
             notComplete = this.length;
+        deferred.promise(this);
+
         return this.each(function(){
             var settings = $.extend({}, DEFAULT_SETTINGS, options),
                 loader = new LazyLoader(this, settings);
-                loader.on('imageLoaded', function(ev, image) {
+                loader.imageLoaded.done(function(image) {
                     if (notComplete-- === 1){
-                        self.trigger('imagesLoaded');
+                        deferred.resolve();
                     }
                 });
             $(this).data(DATA_KEY, loader);
