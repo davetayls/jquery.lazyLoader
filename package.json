@@ -1,6 +1,6 @@
 {
     "name": "jquery.lazyLoader",
-    "version": "0.4.0",
+    "version": "0.4.2",
     "author": "davetayls <dave@the-taylors.org>",
     "description": "basic lazy loading of images from links",
     "repository": {
@@ -13,7 +13,7 @@
         "lazyLoader"
     ],
     "dependencies" : {},
-    "devDependencies": { 
+    "devDependencies": {
         "jasmine-node": "1.x.x",
         "jsdom": "0.2.x"
     },
